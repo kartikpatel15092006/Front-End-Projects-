@@ -1,53 +1,61 @@
-// 🔑 OpenWeather API key (weather data lane ke liye)
+// API key
 let apikey = "ac72db2014df8a6f0183278dbfedfbf1";
 
-// 🔘 Button ko HTML se select kar rahe hain
-let btn = document.querySelector("button");
+// search button
+let btn = document.querySelector(".search-btn");
 
-// 🖱️ Button pe click event lagaya
+// click event
 btn.addEventListener("click", async () => {
-
-  // 👉 Button dabate hi getweather() function call hoga
-  // await isliye kyunki getweather() async hai
   let data = await getweather();
 
-  // 👉 API se aane wale data se city name aur temperature print
-  // data.data → axios ka response object hota hai
-  console.log(
-    data.data.name,
-    data.data.main.temp + "°C"
-  );
-let p = document.querySelector("p")
-p.innerText = "city temprature is" +data.data.main.temp + "°C"
+  // agar data mila tabhi UI update karo
+  if (data) {
+    console.log(data.data.name, data.data.main.temp + "°C");
 
+    // temperature update
+    document.querySelector("h1").innerText =
+      data.data.main.temp + "°C";
+
+    // city update
+    document.querySelector("h2").innerText =
+      data.data.name;
+
+    // wind speed update
+    document.querySelector("#wind").innerText =
+      data.data.wind.speed + " km/h";
+
+    // humidity update
+    let hum = document.querySelector("#hum");
+    hum.innerText = data.data.main.humidity + "%";
+  }
 });
 
-// 🌦️ Weather data lane wala async function
+
+// weather function
 async function getweather() {
-
   try {
-    // 📝 Input field ko select kar rahe hain
-    let input = document.querySelector("#int");
+    // input field
+    let input = document.querySelector("input");
+    let city = input.value;
 
-    // 🏙️ User ne jo city name likha hai use le rahe hain
-    let mains = input.value;
+    // empty input check
+    if (city === "") {
+      alert("Please enter a city name");
+      return;
+    }
 
-    // 🌐 Weather API ka complete URL bana rahe hain
+    // API URL
     let weatherlink =
-      `https://api.openweathermap.org/data/2.5/weather?q=${mains}&appid=${apikey}&units=metric`;
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
 
-    // 📡 Axios se API call (await isliye taaki data aane ka wait kare)
-    let link = await axios.get(weatherlink);
+    // API call
+    let response = await axios.get(weatherlink);
 
-    // ✅ Agar sab sahi raha toh pura response return
-    return link;
+    return response;
 
   } catch (error) {
-
-    // ❌ Agar koi dikkat aaye (galat city, net off, API error)
     console.log("Something went wrong ❌");
-
-    // 🔍 Actual error console me dekhne ke liye
+    alert("City not found 😢");
     console.log(error);
   }
 }

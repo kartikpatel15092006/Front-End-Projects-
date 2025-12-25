@@ -1,18 +1,47 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>weather app project
-    </title>
+  <meta charset="UTF-8">
+  <title>Weather UI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main">
-        <div class="card"><input type="text" placeholder="type here" id="int"><button>search</button></div>
-        <div class="p"><p></p></div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-    <script src="app.js"></script>
+<div class="app">
+  
+  <!-- search bar -->
+  <div class="search">
+    <input type="text" placeholder="new york">
+    <div class="search-btn">
+      🔍
+    </div>
+  </div>
+
+  <!-- weather icon -->
+  <div class="icon">☀️</div>
+
+  <!-- temperature -->
+  <h1 class="temp">7°C</h1>
+  <h2 class="city">New York</h2>
+
+  <!-- bottom info -->
+  <div class="info">
+    <div>
+      <p class="value" id="hum">48%</p>
+      <p class="label">Humidity</p>
+    </div>
+    <div>
+      <p class="value" id="wind">10.29 km/h</p>
+      <p class="label">Wind Speed</p>
+    </div>
+  </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
+
+        
+    
