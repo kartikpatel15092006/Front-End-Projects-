@@ -17,6 +17,8 @@ btn.addEventListener("click", async () => {
     data.data.name,
     data.data.main.temp + "°C"
   );
+let p = document.querySelector("p")
+p.innerText = "city temprature is" +data.data.main.temp + "°C"
 
 });
 
